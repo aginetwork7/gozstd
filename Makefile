@@ -18,7 +18,7 @@ ifeq ($(GOOS_GOARCH),$(GOOS_GOARCH_NATIVE))
 else ifeq ($(GOOS_GOARCH),linux_amd64)
 	TARGET=x86_64-linux GOARCH=amd64 GOOS=linux $(MAKE) package-arch
 else ifeq ($(GOOS_GOARCH),linux_arm)
-	TARGET=arm-linux-gnueabi GOARCH=arm GOOS=linux $(MAKE) package-arch
+	TARGET=arm-linux-gnueabihf GOARCH=arm GOOS=linux $(MAKE) package-arch
 else ifeq ($(GOOS_GOARCH),linux_arm64)
 	TARGET=aarch64-linux GOARCH=arm64 GOOS=linux $(MAKE) package-arch
 else ifeq ($(GOOS_GOARCH),linux_musl_amd64)
@@ -86,3 +86,8 @@ test:
 
 bench:
 	CGO_ENABLED=1 go test -bench=.
+
+
+
+
+docker run --rm --mount type=bind,src="/home/fmy/gowork/fmyAgi7/gozstd",dst=/zstd -w /zstd local/builder_musl:2.0.0-euantorano_zig_0.10.1-1 -c 'cd zstd/lib &&ZSTD_LEGACY_SUPPORT=0 AR="zig ar"CC="zig cc -target arm-linux-gnueabihf" CXX="zig cc -target arm-linux-gnueabihf" MOREFLAGS=  make clean libzstd.a'

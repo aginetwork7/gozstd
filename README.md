@@ -65,9 +65,9 @@ If you're cross-compiling some code that uses gozstd and you stumble upon the fo
 /go/pkg/mod/github.com/valyala/gozstd@v1.6.2/stream.go:47:20: undefined: Writer
 ```
 
-You can easily fix it by enabling [CGO](https://golang.org/cmd/cgo/) and using a cross-compiler (e.g. `arm-linux-gnueabi-gcc`):
+You can easily fix it by enabling [CGO](https://golang.org/cmd/cgo/) and using a cross-compiler (e.g. `arm-linux-gnueabihf-gcc`):
 ```bash
-env CC=arm-linux-gnueabi-gcc GOOS=linux GOARCH=arm CGO_ENABLED=1 go build ./main.go 
+env CC=arm-linux-gnueabihf-gcc GOOS=linux GOARCH=arm CGO_ENABLED=1 go build ./main.go 
 ```
 
 **NOTE**: Check [#21](https://github.com/valyala/gozstd/issues/21) for more info.
